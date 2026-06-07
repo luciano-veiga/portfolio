@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Luciano Veiga — Terminal Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg:#0a0c0a;
+  --surface:#0d110d;
+  --green:#00e676;
+  --green2:#69ff47;
+  --green-dim:#00a152;
+  --green-faint:#1a2e1a;
+  --amber:#ffb300;
+  --cyan:#00e5ff;
+  --red:#ff1744;
+  --text:#b9ffb9;
+  --text2:#6abf69;
+  --text3:#2e7d32;
+  --mono:'Share Tech Mono',monospace;
+  --vt:'VT323',monospace;
+}
+
+html,body{height:100%;background:var(--bg);}
+
+body{
+  font-family:var(--mono);
+  color:var(--text);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:100vh;
+  padding:16px;
+  overflow:hidden;
+}
+
+/* CRT effect */
+body::before{
+  content:'';position:fixed;inset:0;
+  background:repeating-linear-gradient(0deg,rgba(0,0,0,0.15),rgba(0,0,0,0.15) 1px,transparent 1px,transparent 2px);
+  pointer-events:none;z-index:9998;
+}
+body::after{
+  content:'';position:fixed;inset:0;
+  background:radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.7) 100%);
+  pointer-events:none;z-index:9997;
+}
+
+/* TERMINAL WINDOW */
+.terminal{
+  width:100%;max-width:780px;
+  height:90vh;max-height:600px;
+  background:var(--surface);
+  border:1px solid var(--green-dim);
+  border-radius:6px;
+  display:flex;flex-direction:column;
+  box-shadow:0 0 40px rgba(0,230,118,.15), 0 0 80px rgba(0,230,118,.05), inset 0 0 30px rgba(0,0,0,.5);
+  position:relative;
+  animation:flicker 8s ease-in-out infinite;
+}
+
+@keyframes flicker{
+  0%,100%{opacity:1;}
+  92%{opacity:1;}
+  93%{opacity:.97;}
+  94%{opacity:1;}
+  96%{opacity:.98;}
+  97%{opacity:1;}
+}
+
+/* TITLE BAR */
+.titlebar{
+  background:#0f1a0f;
+  border-bottom:1px solid var(--green-dim);
+  padding:8px 14px;
+  display:flex;align-items:center;gap:8px;
+  border-radius:6px 6px 0 0;
+  flex-shrink:0;
+}
+.tb-dots{display:flex;gap:6px;}
+.tb-dot{width:11px;height:11px;border-radius:50%;}
+.tb-dot.r{background:#ff5f57;}
+.tb-dot.y{background:#febc2e;}
+.tb-dot.g{background:#28c840;}
+.tb-title{
+  font-family:var(--vt);font-size:16px;
+  color:var(--text2);letter-spacing:2px;
+  margin-left:auto;margin-right:auto;
+  padding-right:60px;
+}
+
+/* OUTPUT AREA */
+.output{
+  flex:1;overflow-y:auto;
+  padding:16px;
+  scroll-behavior:smooth;
+  font-size:13px;line-height:1.7;
+}
+.output::-webkit-scrollbar{width:3px;}
+.output::-webkit-scrollbar-track{background:transparent;}
+.output::-webkit-scrollbar-thumb{background:var(--green-dim);}
+
+/* INPUT BAR */
+.input-bar{
+  border-top:1px solid var(--green-dim);
+  padding:10px 14px;
+  display:flex;align-items:center;gap:8px;
+  flex-shrink:0;background:#0a0e0a;
+  border-radius:0 0 6px 6px;
+}
+.prompt{color:var(--green);font-size:13px;white-space:nowrap;}
+.input-bar input{
+  flex:1;background:transparent;border:none;outline:none;
+  color:var(--green);font-family:var(--mono);font-size:13px;
+  caret-color:var(--green);
+}
+.input-bar input::selection{background:var(--green);color:#000;}
+
+/* TEXT STYLES */
+.line{display:block;margin-bottom:1px;}
+.cmd-echo{color:var(--green2);}
+.prompt-echo{color:var(--green-dim);}
+.section-title{color:var(--amber);font-family:var(--vt);font-size:20px;letter-spacing:3px;}
+.label{color:var(--cyan);}
+.val{color:var(--text);}
+.accent{color:var(--green);}
+.dim{color:var(--text3);}
+.err{color:var(--red);}
+.link{color:var(--cyan);text-decoration:underline;cursor:pointer;}
+.link:hover{color:var(--green2);}
+.blank{margin-bottom:6px;display:block;}
+.hi{color:var(--amber);}
+
+/* ASCII */
+.ascii{
+  font-family:var(--vt);font-size:15px;
+  color:var(--green-dim);line-height:1.2;
+  white-space:pre;
+}
+.ascii-hi{color:var(--green);}
+
+/* skill bar */
+.skill-row{display:flex;align-items:center;gap:8px;margin-bottom:3px;}
+.skill-name{color:var(--cyan);min-width:200px;font-size:12px;}
+.skill-bar{
+  display:inline-block;
+  font-size:12px;
+  color:var(--green);
+  letter-spacing:1px;
+}
+.skill-bar-bg{color:var(--text3);}
+
+/* project card */
+.proj-card{
+  border:1px solid var(--green-dim);
+  border-left:3px solid var(--green);
+  padding:10px 14px;margin:8px 0;
+  background:var(--green-faint);
+  border-radius:2px;
+}
+.proj-title{color:var(--green2);font-family:var(--vt);font-size:18px;letter-spacing:2px;}
+.proj-meta{color:var(--text2);font-size:11px;margin-top:2px;}
+.proj-link{color:var(--cyan);font-size:12px;}
+
+/* cursor blink */
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+.cursor{display:inline-block;width:8px;height:14px;background:var(--green);vertical-align:middle;animation:blink .8s ease-in-out infinite;margin-left:1px;}
+
+/* boot animation */
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
+.fade-in{animation:fadeIn .3s ease forwards;}
+
+/* mobile */
+@media(max-width:600px){
+  body{padding:8px;justify-content:flex-start;padding-top:8px;}
+  .terminal{height:95vh;max-height:none;}
+  .output{font-size:12px;}
+  .ascii{font-size:12px;}
+  .skill-name{min-width:140px;}
+}
+</style>
+</head>
+<body>
+
+<div class="terminal">
+  <div class="titlebar">
+    <div class="tb-dots">
+      <div class="tb-dot r"></div>
+      <div class="tb-dot y"></div>
+      <div class="tb-dot g"></div>
+    </div>
+    <div class="tb-title">luciano-veiga@portfolio ~ $</div>
+  </div>
+
+  <div class="output" id="output"></div>
+
+  <div class="input-bar">
+    <span class="prompt">luciano@noc:~$</span>
+    <input type="text" id="cmd-input" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="digite um comando...">
+  </div>
+</div>
+
+<script>
+const output = document.getElementById('output');
+const input  = document.getElementById('cmd-input');
+let history  = [];
+let histIdx  = -1;
+let booting  = true;
+
+/* ===== PRINT HELPERS ===== */
+function line(html, cls='', delay=0){
+  return new Promise(r=>{
+    setTimeout(()=>{
+      const s = document.createElement('span');
+      s.className = 'line fade-in' + (cls?' '+cls:'');
+      s.innerHTML = html;
+      output.appendChild(s);
+      output.scrollTop = output.scrollHeight;
+      r();
+    }, delay);
+  });
+}
+function blank(delay=0){ return line('&nbsp;','blank',delay); }
+
+async function typeLines(lines, baseDelay=0, step=40){
+  for(let i=0;i<lines.length;i++){
+    await line(lines[i].html, lines[i].cls||'', baseDelay + i*step);
+  }
+}
+
+/* ===== BOOT SEQUENCE ===== */
+async function boot(){
+  const ascii = [
+    ' ██╗   ██╗███████╗██╗ ██████╗  █████╗ ',
+    ' ██║   ██║██╔════╝██║██╔════╝ ██╔══██╗',
+    ' ██║   ██║█████╗  ██║██║  ███╗███████║',
+    ' ╚██╗ ██╔╝██╔══╝  ██║██║   ██║██╔══██║',
+    '  ╚████╔╝ ███████╗██║╚██████╔╝██║  ██║',
+    '   ╚═══╝  ╚══════╝╚═╝ ╚═════╝ ╚═╝  ╚═╝',
+  ];
+
+  for(let i=0;i<ascii.length;i++){
+    await line(`<span class="ascii ascii-hi">${ascii[i]}</span>`,'',i*60);
+  }
+  await line('<span class="ascii dim">  NOC Terminal Portfolio v1.0.0 — Luciano Veiga</span>','',420);
+  await blank(480);
+  await line('<span class="dim">Inicializando sistema...</span>','',520);
+  await line('<span class="accent">[ OK ]</span> <span class="dim">Carregando perfil profissional</span>','',620);
+  await line('<span class="accent">[ OK ]</span> <span class="dim">Montando projetos</span>','',720);
+  await line('<span class="accent">[ OK ]</span> <span class="dim">Skills indexadas</span>','',820);
+  await blank(900);
+  await line('<span class="text">Bem-vindo ao meu portfolio interativo!</span>','',960);
+  await line('<span class="dim">Para lista de comandos, digite </span><span class="hi">help</span>','',1020);
+  await blank(1060);
+
+  booting = false;
+  input.focus();
+}
+
+/* ===== COMMANDS ===== */
+const COMMANDS = {
+
+  help: async ()=>{
+    await line('<span class="section-title">COMANDOS DISPONÍVEIS</span>');
+    await blank();
+    const cmds = [
+      ['about',    'Quem sou eu'],
+      ['skills',   'Habilidades técnicas'],
+      ['projects', 'Projetos open source'],
+      ['contact',  'Formas de contato'],
+      ['clear',    'Limpar o terminal'],
+      ['whoami',   'Identificação rápida'],
+      ['banner',   'Exibir banner inicial'],
+    ];
+    for(const [cmd,desc] of cmds){
+      await line(`  <span class="label">${cmd.padEnd(12)}</span><span class="dim">→</span>  <span class="val">${desc}</span>`,'',0);
+    }
+    await blank();
+  },
+
+  about: async ()=>{
+    await line('<span class="section-title">SOBRE MIM</span>');
+    await blank();
+    await line('  <span class="label">Nome       </span><span class="val">Luciano Veiga da Silva</span>');
+    await line('  <span class="label">Localização</span><span class="val">Livramento de Nossa Senhora — BA, Brasil</span>');
+    await line('  <span class="label">Função     </span><span class="val">Network Infrastructure & Cloud Manager</span>');
+    await line('  <span class="label">Experiência</span><span class="val">20+ anos em redes, ISP e cloud</span>');
+    await blank();
+    await line('  <span class="dim">Profissional com solida experiencia em infraestrutura de redes,</span>');
+    await line('  <span class="dim">ambientes ISP e cloud AWS. Atualmente aprofundando conhecimentos</span>');
+    await line('  <span class="dim">em DevSecOps pelo programa Hackers do Bem (SENAI/RNP/Softex),</span>');
+    await line('  <span class="dim">com 240+ horas concluidas em segurança, IaC e pipelines CI/CD.</span>');
+    await blank();
+    await line('  <span class="dim">Criador de ferramentas open source gratuitas para a comunidade</span>');
+    await line('  <span class="dim">de TI — acredito que conhecimento bom e compartilhado.</span>');
+    await blank();
+  },
+
+  skills: async ()=>{
+    await line('<span class="section-title">SKILLS</span>');
+    await blank();
+
+    const skills = [
+      {cat:'REDES & ISP', items:[
+        ['MikroTik / RouterOS',    10],
+        ['Redes TCP/IP / BGP',     10],
+        ['Infraestrutura ISP',      9],
+        ['SNMP / Monitoramento',    9],
+        ['Firewall / QoS',          9],
+      ]},
+      {cat:'CLOUD & DEVOPS', items:[
+        ['AWS (Cloud Practitioner)',9],
+        ['Docker / Containers',     8],
+        ['Terraform / IaC',         7],
+        ['CI/CD Pipelines',         7],
+        ['DevSecOps',               7],
+      ]},
+      {cat:'MONITORAMENTO', items:[
+        ['Zabbix',                  9],
+        ['Grafana',                 9],
+        ['Prometheus',              8],
+        ['SonarQube / SAST',        7],
+        ['Trivy / DockerSlim',      7],
+      ]},
+      {cat:'SISTEMAS', items:[
+        ['Linux / Ubuntu Server',   9],
+        ['Windows Server',          8],
+        ['Git / GitHub',            8],
+        ['Bash / Shell Script',     8],
+      ]},
+    ];
+
+    for(const group of skills){
+      await line(`  <span class="hi">[${group.cat}]</span>`);
+      for(const [name,lvl] of group.items){
+        const filled = '█'.repeat(lvl);
+        const empty  = '░'.repeat(10-lvl);
+        await line(`  <span class="skill-name">${name.padEnd(28)}</span><span class="skill-bar">${filled}</span><span class="skill-bar-bg">${empty}</span> <span class="dim">${lvl*10}%</span>`);
+      }
+      await blank();
+    }
+  },
+
+  projects: async ()=>{
+    await line('<span class="section-title">PROJETOS</span>');
+    await blank();
+
+    const card = document.createElement('div');
+    card.className = 'proj-card fade-in';
+    card.innerHTML = `
+      <div class="proj-title">⚡ RouterForge NOC</div>
+      <div class="proj-meta">Gerador de configuracao MikroTik com Failover Automatico</div>
+      <br>
+      <span class="dim">Stack    : </span><span class="val">HTML5 · CSS3 · JavaScript Vanilla</span><br>
+      <span class="dim">Features : </span><span class="val">Failover 3 links WAN · Netwatch · NAT · QoS · Firewall</span><br>
+      <span class="dim">Status   : </span><span class="accent">LIVE — Gratuito e Open Source</span><br>
+      <br>
+      <span class="dim">Demo     : </span><a class="link" href="https://luciano-veiga.github.io/-routerforge-noc/" target="_blank">luciano-veiga.github.io/-routerforge-noc/</a><br>
+      <span class="dim">GitHub   : </span><a class="link" href="https://github.com/luciano-veiga/-routerforge-noc" target="_blank">github.com/luciano-veiga/-routerforge-noc</a>
+    `;
+    output.appendChild(card);
+    output.scrollTop = output.scrollHeight;
+    await blank();
+    await line('<span class="dim">  Mais projetos em desenvolvimento. Fique de olho!</span>');
+    await blank();
+  },
+
+  contact: async ()=>{
+    await line('<span class="section-title">CONTATO</span>');
+    await blank();
+    await line('  <span class="label">LinkedIn  </span><a class="link" href="https://www.linkedin.com/in/lucianoveiga-ti" target="_blank">linkedin.com/in/lucianoveiga-ti</a>');
+    await line('  <span class="label">GitHub    </span><a class="link" href="https://github.com/luciano-veiga" target="_blank">github.com/luciano-veiga</a>');
+    await line('  <span class="label">Email     </span><span class="val">veiga.luciano@gmail.com</span>');
+    await blank();
+    await line('  <span class="dim">Aberto a projetos freelance em redes, cloud e infraestrutura.</span>');
+    await blank();
+  },
+
+  whoami: async ()=>{
+    await line('<span class="accent">luciano-veiga</span>');
+    await line('<span class="dim">Network Infrastructure & Cloud Manager</span>');
+    await line('<span class="dim">Livramento de Nossa Senhora — BA — Brasil</span>');
+    await blank();
+  },
+
+  clear: async ()=>{
+    output.innerHTML='';
+    await line('<span class="dim">Terminal limpo. Digite </span><span class="hi">help</span><span class="dim"> para ver os comandos.</span>');
+    await blank();
+  },
+
+  banner: async ()=>{
+    output.innerHTML='';
+    await boot();
+  },
+};
+
+/* ===== RUN COMMAND ===== */
+async function run(raw){
+  const cmd = raw.trim().toLowerCase();
+  if(!cmd) return;
+
+  history.unshift(cmd);
+  histIdx = -1;
+
+  await line(`<span class="prompt-echo">luciano@noc:~$</span> <span class="cmd-echo">${raw}</span>`);
+
+  if(COMMANDS[cmd]){
+    await COMMANDS[cmd]();
+  } else {
+    await line(`<span class="err">Comando nao encontrado: ${cmd}</span>`);
+    await line(`<span class="dim">Digite </span><span class="hi">help</span><span class="dim"> para ver os comandos disponiveis.</span>`);
+    await blank();
+  }
+}
+
+/* ===== INPUT HANDLING ===== */
+input.addEventListener('keydown', async e=>{
+  if(booting) return;
+
+  if(e.key==='Enter'){
+    const val = input.value;
+    input.value='';
+    await run(val);
+  }
+
+  if(e.key==='ArrowUp'){
+    e.preventDefault();
+    if(histIdx < history.length-1){ histIdx++; input.value=history[histIdx]||''; }
+  }
+  if(e.key==='ArrowDown'){
+    e.preventDefault();
+    if(histIdx > 0){ histIdx--; input.value=history[histIdx]||''; }
+    else{ histIdx=-1; input.value=''; }
+  }
+
+  if(e.key==='Tab'){
+    e.preventDefault();
+    const val = input.value.trim().toLowerCase();
+    const match = Object.keys(COMMANDS).find(k=>k.startsWith(val));
+    if(match) input.value=match;
+  }
+});
+
+/* click anywhere focuses input */
+document.querySelector('.terminal').addEventListener('click',()=>{ if(!booting) input.focus(); });
+
+/* ===== START ===== */
+boot();
+</script>
+</body>
+</html>
