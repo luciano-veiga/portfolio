@@ -23,7 +23,7 @@ Construído com HTML5, CSS3 e JavaScript puro. Zero dependências externas, zero
 
 ## Demo ao vivo
 
-> **[luciano-veiga.github.io/portfolio](https://luciano-veiga.github.io/portfolio/)**
+> **[luciano-veiga.github.io/portfolio](https://luciano-veiga.github.io/portifolio/)**
 
 ---
 
