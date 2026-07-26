@@ -1,11 +1,11 @@
 <div align="center">
 
-# 💻 Terminal Portfolio
+# 💻 Portfólio — Luciano Veiga
 
-### Portfolio Interativo Estilo Terminal — Luciano Veiga
+### Network & Infrastructure Manager | AWS | DevSecOps
 
-[![Live Demo](https://img.shields.io/badge/DEMO-Acessar%20Agora-00e676?style=for-the-badge&logo=github)](https://luciano-veiga.github.io/portfolio/)
-[![Free](https://img.shields.io/badge/USO-100%25%20Gratuito-00b8d9?style=for-the-badge)](https://luciano-veiga.github.io/portfolio/)
+[![Live Demo](https://img.shields.io/badge/DEMO-Acessar-00e676?style=for-the-badge&logo=github)](https://luciano-veiga.github.io/portfolio/)
+[![Free](https://img.shields.io/badge/USO-100%25Gratuito-008d9f?style=for-the-badge)](https://luciano-veiga.github.io/portfolio/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-lucianoveiga--ti-0077B5?style=for-the-badge&logo=linkedin)](https://www.linkedin.com/in/lucianoveiga-ti)
 [![GitHub](https://img.shields.io/badge/GitHub-luciano--veiga-333?style=for-the-badge&logo=github)](https://github.com/luciano-veiga)
 
@@ -13,58 +13,48 @@
 
 ---
 
-## O que e?
+## O que é?
 
-Portfolio profissional interativo com interface estilo terminal CLI. Navegue pelo conteudo digitando comandos — sem menus, sem cliques, sem apresentacoes genericas.
+Portfólio profissional com identidade visual inspirada em ambientes de NOC e monitoramento de rede: terminal de boot, status de sistema, e conteúdo organizado como se fosse saída de comandos reais (`whoami`, `nmap`, `ps aux`, `traceroute`).
 
-Construido com HTML5, CSS3 e JavaScript puro. Zero dependencias externas. Zero frameworks.
+Construído com HTML5, CSS3 e JavaScript puro. Zero dependências externas, zero frameworks.
 
 ---
 
 ## Demo ao vivo
 
-> **[https://luciano-veiga.github.io/portfolio/](https://luciano-veiga.github.io/portfolio/)**
+> **[luciano-veiga.github.io/portfolio](https://luciano-veiga.github.io/portfolio/)**
 
 ---
 
-## Comandos disponíveis
+## Seções
 
-| Comando | Descricao |
-|---|---|
-| `help` | Lista todos os comandos disponíveis |
-| `about` | Apresentacao profissional |
-| `skills` | Habilidades tecnicas com barras de progresso |
-| `projects` | Projetos open source |
-| `contact` | LinkedIn, GitHub e email |
-| `whoami` | Identificacao rapida |
-| `clear` | Limpa o terminal |
-| `banner` | Reexibe a tela inicial |
-
-**Dicas:**
-- Pressione `Tab` para autocompletar comandos
-- Use as setas `↑` `↓` para navegar pelo historico de comandos
+| Seção | Conteúdo |
+| --- | --- |
+| **Sobre** | Apresentação profissional e principais dados |
+| **Skills** | Habilidades técnicas em formato de scan de rede |
+| **Certificações** | AWS Cloud Practitioner, AWS SAA, especialização SecDevOps/DevOps (Hackers do Bem) |
+| **Trajetória** | Evolução de carreira em formato de traceroute |
+| **Projetos** | Repositórios em destaque, em formato de lista de processos |
+| **Contato** | Links diretos para LinkedIn e GitHub |
 
 ---
 
 ## Funcionalidades
 
-- Boot animado com ASCII art
-- Efeito CRT com scanlines e vinheta
-- Animacao de flicker autentica
-- Historico de comandos com teclas de seta
-- Autocomplete com Tab
-- Barras de skill animadas por categoria
-- Card de projeto com links clicaveis
-- 100% responsivo para mobile
+- Terminal de abertura com efeito de digitação e cursor piscante
+- Barra de status fixa com indicador de sistema "online"
+- Layout responsivo, com foco visível de teclado e respeito a `prefers-reduced-motion`
+- Seções em formato de saída de comandos reais de rede (nmap, ps aux, traceroute)
 
 ---
 
 ## Stack
 
 - HTML5 + CSS3 + JavaScript vanilla
-- Fontes: Share Tech Mono + VT323 (Google Fonts)
+- Fontes: JetBrains Mono + Inter (Google Fonts)
 - Hospedagem: GitHub Pages (gratuito)
-- Zero dependencias — arquivo unico
+- Zero dependências — arquivo único
 
 ---
 
@@ -72,7 +62,7 @@ Construido com HTML5, CSS3 e JavaScript puro. Zero dependencias externas. Zero f
 
 ```
 portfolio/
-├── index.html    # Aplicacao completa em arquivo unico
+├── index.html    # Aplicação completa em arquivo único
 └── README.md     # Este arquivo
 ```
 
@@ -81,15 +71,14 @@ portfolio/
 ## Projetos em destaque
 
 **RouterForge NOC**
-Gerador de configuracao MikroTik com failover automatico entre 3 links WAN.
-Script RouterOS completo com Netwatch, NAT, Firewall e QoS.
-Acesse: [luciano-veiga.github.io/-routerforge-noc/](https://luciano-veiga.github.io/-routerforge-noc/)
+Gerador de configuração MikroTik com failover automático entre até 3 links WAN. Script RouterOS completo com Netwatch, NAT, Firewall e QoS.
+Acesse: [luciano-veiga.github.io/-routerforge-noc](https://luciano-veiga.github.io/-routerforge-noc/)
 
 ---
 
-## Licenca
+## Licença
 
-Projeto open source de uso livre. Pode adaptar para o seu proprio portfolio.
+Projeto de uso livre. Pode adaptar para o seu próprio portfólio.
 
 ---
 
